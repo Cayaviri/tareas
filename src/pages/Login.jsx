@@ -12,9 +12,10 @@ export default function Login(){
         event.preventDefault();
         console.log(email.current.value);
         console.log(password.current.value);
+        window.location.href = '/tarea';
     };
     return (
-        <>
+        <div className="contenedor-tareas">
             <Container>
                 <Title>Login</Title>
                 <Form onSubmit={login}>
@@ -23,6 +24,6 @@ export default function Login(){
                     <SubmitButton>Login</SubmitButton>
                 </Form>
             </Container>
-        </>
+        </div>
     )
 }

@@ -1,0 +1,19 @@
+.contenedor-menu{
+    display: flex;
+    flex-direction: row;
+    margin: 15px;   
+    padding: 5px;
+    margin: 0;
+    
+}
+  
+.menu-item{
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.menu-item:hover{
+    color: #1b1032;
+    border-bottom: #fff solid;
+}
