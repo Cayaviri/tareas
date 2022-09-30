@@ -4,15 +4,16 @@ import Container from '../components/container/Container';
 import Form from '../components/forms/Form';
 import Input from '../components/forms/Input';
 import Title from '../components/header/Title';
-import { authContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Login(){
     const email = useRef();
     const password = useRef();
-    const {setUser} = useContext(authContext);
+    const {setUser} = useContext(AuthContext);
 
     const login = (event) => {
         event.preventDefault();
+        alert('Login successful')
         console.log(email.current.value);
         console.log(password.current.value);
         setUser({
@@ -22,7 +23,9 @@ export default function Login(){
                 password: password.current.value,
             },
         });
+        console.log('modificado el setUser')
 
+        alert(email.current.value);
         window.location.href = '/tarea'
     };
     return (

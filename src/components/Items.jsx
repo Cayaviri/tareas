@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Icons from './buttons/Icons'
 import ItemContenedor from './container/ItemContenedor'
 import Texto from './forms/Texto'
-import { BiXCircle } from "react-icons/bi";
+import { BiXCircle, BiEditAlt, BiCheck } from "react-icons/bi";
 import '../App.css'
 
 export default function Items({index, id, titulo, fecha, realizado, completarTarea, eliminarTarea}) {
@@ -17,13 +17,23 @@ export default function Items({index, id, titulo, fecha, realizado, completarTar
     eliminarTarea(id)
   }
 
+  const editar = (id) => {
+    console.log('editando...', id)
+  }
+
  return (
     <>
      <ItemContenedor >
-        <Texto onClick={()=>completar(index)}>
+        <Texto>
         {titulo}
         </Texto>
-        <Texto onClick={() => completar(index)}>{realizado? `✔️ ${fecha}`: '😒'} </Texto>
+        <Texto>{realizado? `✔️ ${fecha}`: '😒'} </Texto>
+        <Icons onClick={()=>completar(index)}>
+          <BiCheck />
+        </Icons>
+        <Icons onClick={() => editar(id)}>
+          <BiEditAlt />
+        </Icons>
         <Icons 
           onClick={()=>eliminar(id)}>
           <BiXCircle />
