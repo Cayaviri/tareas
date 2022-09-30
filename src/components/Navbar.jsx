@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import './Navbar.css';
 import styled from "styled-components";
+import AuthContext from "../context/AuthContext";
 
 
 const Nav = styled.nav`
@@ -19,9 +20,14 @@ const Li = styled.li`
 
 
 export default function Navbar() {
-   return ( 
+
+  const data = useContext(AuthContext)
+ 
+  
+  return ( 
    <>
     <Nav className="contenedor-menu">
+      {data? data.user[data] : 'No logged'}
         <Link className="menu-item" to={"/"}><strong>Home</strong></Link>
         <Link className="menu-item" to={"/login"}><strong>Login</strong></Link>
         <Link className="menu-item" to={"/registro"}><strong>Registro</strong></Link>

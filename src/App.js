@@ -15,6 +15,7 @@ function App() {
     <div className='contenedor-menu'>
     <BrowserRouter>
       <Routes>
+       
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/registro' element={<Registro />}></Route>

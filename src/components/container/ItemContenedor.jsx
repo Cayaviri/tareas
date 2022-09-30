@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ItemContenedor = styled.div`
-    width: 750px;
+    width: 550px;
     min-height: 40px;
     background-color: #1b1032;
     margin: 5px 0;
