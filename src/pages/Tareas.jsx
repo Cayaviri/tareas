@@ -34,7 +34,11 @@ export default function Tareas() {
     setLocalStorage(listatareas)  
   })
   */
-
+useEffect(()=>{
+  console.log('listatareas :',listatareas)
+  setListaTareas(listatareas) 
+   
+},[listatareas])
   const editarTarea = (index) => {
     console.log('editando tarea: ' + index)
     const temptitulo = listatareas[index].titulo;
@@ -45,7 +49,7 @@ export default function Tareas() {
 
   const completarTarea = (index) => {
     console.log(index, ' completando')
-    const tempTareas = listatareas;
+    let tempTareas = listatareas;
     console.log(tempTareas[index]);
     tempTareas[index].realizado=true;
     tempTareas[index].fecha=new Date().toLocaleDateString('en-US');
@@ -56,9 +60,10 @@ export default function Tareas() {
   const eliminarTarea = (index) =>{
     console.log('eliminado', index)
     //const tempTareas = listatareas.filter(tarea => tarea.id !== id);
-    const tempTareas = listatareas;
+    let tempTareas = listatareas;
     tempTareas.splice(index, 1);
     setListaTareas(tempTareas);
+    console.log(tempTareas)
     return
   }
 

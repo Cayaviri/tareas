@@ -37,7 +37,7 @@ export default function Items({index, id, titulo, fecha, realizado, completarTar
           {titulo}
         </Texto>
         <Texto>{realizado? `✔️ ${fecha}`: '😒'} </Texto>
-        <Icons onClick={()=>completar(index)}>
+        <Icons onClick={()=>completarTarea(index)}>
           <BiCheck />
         </Icons>
         <Icons onClick={() => editar(index)}>
