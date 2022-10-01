@@ -13,6 +13,7 @@ import {useLocalStorage} from '../useLocalStorage'
 export default function Tareas() {
  
   const [listatareas, setListaTareas] = useLocalStorage('tareas','')
+  const [indexEditando, setIndexEditando] = useState(null)
   
   /*useState(
     JSON.parse(window.localStorage.getItem('tareas'))
@@ -34,12 +35,20 @@ export default function Tareas() {
   })
   */
 
-  const completarTarea = (id) => {
-    console.log(id, ' completando')
+  const editarTarea = (index) => {
+    console.log('editando tarea: ' + index)
+    const temptitulo = listatareas[index].titulo;
+    setIndexEditando(index)
+    document.getElementById('titulo').value = temptitulo
+    document.getElementById('index').value = index
+  }
+
+  const completarTarea = (index) => {
+    console.log(index, ' completando')
     const tempTareas = listatareas;
-    console.log(tempTareas[id]);
-    tempTareas[id].realizado=true;
-    tempTareas[id].fecha=new Date().toLocaleDateString('en-US');
+    console.log(tempTareas[index]);
+    tempTareas[index].realizado=true;
+    tempTareas[index].fecha=new Date().toLocaleDateString('en-US');
     setListaTareas(tempTareas);
     //console.log('tarea completada...') 
   }
@@ -56,10 +65,14 @@ export default function Tareas() {
   const agregarTarea = (e) =>{
     //e.preventDefault();
     const nuevotitulo = document.getElementById('titulo').value;
+    const indexEditando = document.getElementById('index').value;
+
     if (nuevotitulo===''){
       alert('Debe registrar una tarea')
       return;
     }
+
+    if (indexEditando === '') {
     
     const nuevaTarea = {
       id:listatareas.length+1,
@@ -71,6 +84,14 @@ export default function Tareas() {
     listaNueva.push(nuevaTarea);
     setListaTareas(listaNueva)
     console.log('agregado nueva tarea...')
+  } 
+  else {
+    let listaNueva = listatareas;
+    listaNueva[indexEditando]['titulo']= nuevotitulo
+    setListaTareas(listaNueva) 
+    setIndexEditando(null)
+    console.log('tarea modificada')
+  }
    
   }
 
@@ -85,6 +106,7 @@ export default function Tareas() {
         realizado={li.realizado}
         completarTarea={() => completarTarea(index)}
         eliminarTarea={() => eliminarTarea(index)}
+        editarTarea={() => editarTarea(index)} //
         >
       </Items>
     )  
@@ -98,6 +120,7 @@ export default function Tareas() {
         <Tarea>      
             <FormTarea>
               <form onSubmit={agregarTarea}>
+              <input type="hidden" id="index" value="" />
               <Input id='titulo'></Input>
               <SubmitButton>Registrar</SubmitButton>
               </form>
@@ -113,6 +136,7 @@ export default function Tareas() {
                 realizado={li.realizado}
                 completarTarea={()=> completarTarea(index)}
                 eliminarTarea={()=>eliminarTarea(index)}
+                editarTarea={()=>editarTarea(index)}
                 >
               </Items>)
             })
